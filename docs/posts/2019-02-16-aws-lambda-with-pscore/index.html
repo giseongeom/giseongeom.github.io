@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.79.1" />
+
+  
+  <meta name="description" content="Some description">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://perfmon.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://perfmon.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://perfmon.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://perfmon.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://perfmon.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://perfmon.io/css/bootstrap.min.css" />
+
+  
+  <title>AWS Lambda에서 PowerShell Core 테스트 (2019) | Unexpected shutdown</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #212529;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 1000px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/index.xml">RSS</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>AWS Lambda에서 PowerShell Core 테스트 (2019)</h1>
+<p><img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-99.jpg" alt="ps6-on-lambda-result"></p>
+<h2 id="background">Background</h2>
+<p>요즘 대세는 서버리스(serverless)라는 글을 주변에서 자주 접하고 있습니다. Powershell을 사용하는 입장에서는 조금 아쉬움이 있었는데, AWS Developer Blog 에서 재미있는 글을 발견했습니다. <a href="https://aws.amazon.com/blogs/developer/announcing-lambda-support-for-powershell-core/">.NET Core lambda runtime에서 PowerShell Core를 사용할 수 있다</a>는 내용입니다. 재미있어서 그 블로그 포스팅에 언급된 내용을 그대로 테스트를 수행했습니다.</p>
+<p>테스트 환경은 다음과 같습니다.</p>
+<ul>
+<li>Windows 10 1809 / PowerShell Core 6.1.2 on <a href="https://conemu.github.io/">ConEmu</a>
+<img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-01.jpg" alt="PS-Module-Info"></li>
+<li>.NET Core SDK 2.2.104</li>
+<li>AWS 서울 (ap-northeast-2) region</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="deploy">Deploy</h2>
+<p>AWS에서 제공하는 기본 테스트에 사용된 예제 코드를 조금 수정했습니다.</p>
+<ul>
+<li>변경 전: Security Group에서 RDP 통신 허용된 rule 삭제</li>
+<li>변경 후: <strong>총 몇 개의 Security Group에서 RDP 허가하는 rule이 발견되었는지 표시</strong></li>
+</ul>
+<p>lambda에서 실행될 <code>RDPLockDown.ps1</code> 작성합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e">#Requires -Modules @{ModuleName=&#39;AWSPowerShell.NetCore&#39;;ModuleVersion=&#39;3.3.450.0&#39;}</span>
+$rulesDetected = 0
+
+Get-EC2SecurityGroup | <span style="color:#66d9ef">ForEach</span>-Object -Process {
+
+    $securityGroupId = $_.GroupId
+    $_.IpPermission | <span style="color:#66d9ef">ForEach</span>-Object -Process {
+
+        <span style="color:#66d9ef">if</span> ($_.ToPort <span style="color:#f92672">-eq</span> 3389) {
+            Write-Host <span style="color:#e6db74">&#34;Found open RDP port for $securityGroupId&#34;</span>
+            $rulesDetected++
+        }
+    }
+}
+
+Write-Host <span style="color:#e6db74">&#34;Scan complete and found $rulesDetected EC2 security group ingress rules&#34;</span>
+</code></pre></div><p>​</p>
+<p><code>Publish-AWSPowerShellLambda</code> cmdlet 이용해서 배포합니다.</p>
+<blockquote>
+<p><code>.NET Core</code> SDK가 기본 경로에 설치되어 있지 않다면 배포에 실패합니다. 이 경우 <code>DOTNET_ROOT</code> 환경 변수를 지정합니다. (저는 .NET Core SDK Portable 버전을 사용하고 있어서 명시적으로 지정)</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$env:DOTNET_ROOT=<span style="color:#e6db74">&#34;C:\tools\dotnet&#34;</span>
+Publish-AWSPowerShellLambda -ScriptPath .\RDPLockDown.ps1 -Name RDPLockDown
+</code></pre></div><p>배포 과정의 스크린샷입니다.</p>
+<p><img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-02.jpg" alt="pscore-on-lambda-deploy-01"></p>
+<p><img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-03.jpg" alt="pscore-on-lambda-deploy-02"></p>
+<blockquote>
+<p>(최초로 AWS Lambda 배포하는 경우) IAM Role 생성하고 IAM Policy를 연결</p>
+</blockquote>
+<p>배포가 끝나면 AWS Management Console 에서 테스트를 할 수 있습니다.</p>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="run">Run</h2>
+<p>test event 를 생성합니다.</p>
+<p><img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-04.jpg" alt="test-event-for-ps6-awslambda"></p>
+<blockquote>
+<p>실제 코드는 input event에 의존하지 않습니다. 그러나, 테스트를 위해서 기본값으로 생성합니다.</p>
+</blockquote>
+<p>​</p>
+<p>관리콘솔에서 테스트 선택하면 결과를 볼 수 있습니다.</p>
+<p><img src="https://perfmon.io/assets/2019/2019.02.16__ps6awslambda-test-screenshot-00.jpg" alt="test-result"></p>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Cold Start의 경우 Duration은 <strong>3.5 초 (3,500 ms)</strong> 이며 메모리 사용량은 <strong>350MB</strong> 입니다. PowerShell 스크립트의 특성상 범용 Production Application 보다는 Ops 작업을 자동화하기에는 적당하다고 생각됩니다.</p>
+<p>그러나, Lambda의 <strong>저장소 사용량이(25MB)</strong> 예상보다 크기 때문에 여러 가지 Powershell 모듈을 설치하는 것은 부담스럽네요. 앞으로 좀 더 많은 테스트가 필요하다고 생각합니다.</p>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/blogs/developer/announcing-lambda-support-for-powershell-core/">Announcing Lambda Support for PowerShell Core</a></li>
+<li><a href="https://aws.amazon.com/ko/about-aws/whats-new/2018/09/aws-lambda-supports-powershell-core/">AWS Lambda에서 PowerShell Core 지원</a></li>
+<li><a href="https://github.com/giseongeom/learning-something/tree/master/aws/lambda/ps6demo/RDPLockDown">RDPLockDown 예제코드</a></li>
+<li><a href="https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/limits.html">AWS Lambda 제한</a></li>
+</ul>
+
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-134590597-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+</body>
+
+</html>

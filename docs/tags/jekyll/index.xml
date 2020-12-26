@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jekyll on Unexpected shutdown</title>
+    <link>https://perfmon.io/tags/jekyll/</link>
+    <description>Recent content in jekyll on Unexpected shutdown</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Jun 2018 21:39:03 +0900</lastBuildDate><atom:link href="https://perfmon.io/tags/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog rebooted (2018)</title>
+      <link>https://perfmon.io/posts/2018-06-06-blog-rebooted/</link>
+      <pubDate>Tue, 05 Jun 2018 21:39:03 +0900</pubDate>
+      
+      <guid>https://perfmon.io/posts/2018-06-06-blog-rebooted/</guid>
+      <description>2007년부터 BlogSpot에서 잡다한 글을 올리곤 했습니다. 이직/결혼 등 인생의 이벤트를 겪으면서 방치하게 되었는데, 가끔 실수로(?) 들어가게 되면 마음이 불편해서 금방 창을 닫아 버렸습니다.
+2016년에 김민장님 블로그를 우연히 들어가면서, GitHub Pages를 이용한 블로그 부활(?)을 기획하게 되었습니다. 같은 jekyll theme를 사용하면 쉽고 빠르게 시작할 수 있으리라 생각했는데, 예상보다 여의치 않았습니다. 그래서, 2년 가까이 놀다가 리프레시 휴가 1일차에 시작하게 되었습니다 :-)
+2018년에는 WSL을 이용해서 Windows 환경에서도 쉽게 작업할 수 있어서 좋네요. GitHub Pages도 Jekyll 3.</description>
+    </item>
+    
+  </channel>
+</rss>

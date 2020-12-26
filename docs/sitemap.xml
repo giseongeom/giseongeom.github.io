@@ -3,43 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://perfmon.io/post/hello_world/</loc>
-    <lastmod>2020-12-26T01:25:56+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://perfmon.io/tags/aws/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://perfmon.io/post/</loc>
-    <lastmod>2020-12-26T01:25:56+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://perfmon.io/posts/2019-02-16-aws-lambda-with-pscore/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://perfmon.io/</loc>
-    <lastmod>2020-12-26T01:25:56+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://perfmon.io/tags/lambda/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://perfmon.io/post/readme/</loc>
-    <lastmod>2020-12-26T01:24:12+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://perfmon.io/posts/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://perfmon.io/categories/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://perfmon.io/tags/powershell/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://perfmon.io/tags/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://perfmon.io/</loc>
+    <lastmod>2019-02-16T21:39:03+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://perfmon.io/posts/2018-06-06-blog-rebooted/</loc>
+    <lastmod>2018-06-05T21:39:03+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://perfmon.io/tags/changelog/</loc>
+    <lastmod>2018-06-05T21:39:03+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://perfmon.io/tags/jekyll/</loc>
+    <lastmod>2018-06-05T21:39:03+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://perfmon.io/about/</loc>
   </url>
   
 </urlset>
