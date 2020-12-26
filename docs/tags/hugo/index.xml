@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Unexpected shutdown</title>
+    <link>https://perfmon.io/tags/hugo/</link>
+    <description>Recent content in hugo on Unexpected shutdown</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 Dec 2020 00:13:50 +0900</lastBuildDate><atom:link href="https://perfmon.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog rebooted (2020)</title>
+      <link>https://perfmon.io/posts/2020-12-27-blog-rebooted-2020/</link>
+      <pubDate>Sun, 27 Dec 2020 00:13:50 +0900</pubDate>
+      
+      <guid>https://perfmon.io/posts/2020-12-27-blog-rebooted-2020/</guid>
+      <description> 코로나(Covid-19)가 심각하지 않던 2020.01.21에 찍은 회사 내 자리
+ 블로그에 글을 좀 써보려고 오랫동안 방치하고 있었던 github pages 저장소를 다시 손보기 시작했습니다. 2018년에도 이런 마음으로 글을 작성했다가 실패(?)한 기억이 있어서 조심스럽습니다만, 그래도 뭐라도 쓰고 싶다는 욕망에 기대어 글쓰기를 해 보려고 합니다.
+jekyll 대신 Windows 환경도 공식적으로 지원하는 Hugo를 이용해서 웹사이트를 재구성했습니다. 별도 저장소를 사용하는 방식이 좀 어색하지만, 빠른 빌드 및 간단한 설정에는 아주 만족스럽네요.
+참고자료  나만의 블로그를 위한 Hugo(휴고) 설치 및 기본 설정 하기 | 룰루랄라코딩 HUGO - Quick Start Minimal Bootstrap Hugo Theme  </description>
+    </item>
+    
+  </channel>
+</rss>
